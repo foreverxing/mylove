@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Eternal Story</title>
+    <!-- Google Fonts for a more elegant, romantic feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose: #ff4d6d;
+            --soft-pink: #ffb3c1;
+            --gold: #f9d423;
+            --deep-plum: #1a0a1a;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #2d0b24 0%, #0b0d17 100%);
+            font-family: 'Playfair Display', serif;
+            color: #fff5f5;
+            overflow-x: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0; left: 0; pointer-events: none; z-index: 1;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            margin: 0;
+            background: linear-gradient(to bottom, #fff, var(--soft-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(255, 77, 109, 0.5));
+        }
+
+        .names {
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* --- Romantic Tree --- */
+        .tree-box {
+            margin: 40px 0;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.05); filter: brightness(1.2) drop-shadow(0 0 15px var(--rose)); }
+        }
+
+        /* --- Elegant Milestone Timeline --- */
+        .timeline {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .milestone-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 179, 193, 0.2);
+            border-radius: 40px 0 40px 0;
+            padding: 40px;
+            margin-bottom: 60px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.5s;
+        }
+
+        .milestone-card:hover {
+            border-color: var(--rose);
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.3);
+        }
+
+        .label {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--soft-pink);
+            margin-bottom: 20px;
+        }
+
+        .live-clock {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .time-unit {
+            position: relative;
+        }
+
+        .unit-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            display: block;
+            color: white;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .unit-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="bgCanvas"></canvas>
+
+    <div class="hero">
+        <h1>Our Journey</h1>
+        <div class="names">Nicole & Joey</div>
+        
+        <div class="tree-box">
+            <!-- Hand-drawn heart tree style -->
+            <svg width="180" height="180" viewBox="0 0 100 100">
+                <path d="M50,95 L50,60 M50,70 L35,50 M50,75 L65,55" stroke="#3d2117" stroke-width="3" fill="none"/>
+                <path d="M50,20 C30,20 20,40 50,70 C80,40 70,20 50,20" fill="var(--rose)" opacity="0.8"/>
+                <circle cx="35" cy="45" r="10" fill="#ff758f" opacity="0.6"/>
+                <circle cx="65" cy="50" r="12" fill="#c9184a" opacity="0.6"/>
+                <circle cx="50" cy="40" r="8" fill="#ffb3c1" opacity="0.7"/>
+            </svg>
+        </div>
+        
+        <div class="scroll-hint">SCROLL TO SEE OUR MOMENTS</div>
+    </div>
+
+    <div class="timeline">
+        <!-- Milestone 1 -->
+        <div class="milestone-card" data-date="2015-01-05T00:00:00">
+            <div class="label">The moment our worlds met...</div>
+            <div class="live-clock"></div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="milestone-card" data-date="2015-01-14T13:14:00">
+            <div class="label">Our hearts beat as one...</div>
+            <div class="live-clock"></div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="milestone-card" data-date="2017-08-21T11:00:00">
+            <div class="label">For the rest of our lives...</div>
+            <div class="live-clock"></div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let elements = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            elements = [];
+            // Mix of stars, petals, and hearts
+            for(let i = 0; i < 100; i++) {
+                elements.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3 + 1,
+                    speed: Math.random() * 0.5 + 0.2,
+                    type: Math.random() > 0.7 ? 'petal' : (Math.random() > 0.5 ? 'star' : 'heart'),
+                    opacity: Math.random(),
+                    swing: Math.random() * 2
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            elements.forEach(e => {
+                ctx.globalAlpha = e.opacity;
+                if(e.type === 'star') {
+                    ctx.fillStyle = "white";
+                    ctx.beginPath(); ctx.arc(e.x, e.y, e.size/2, 0, Math.PI*2); ctx.fill();
+                } else if(e.type === 'petal') {
+                    ctx.fillStyle = "#ffb3c1";
+                    ctx.beginPath(); ctx.ellipse(e.x, e.y, e.size*2, e.size, e.opacity, 0, Math.PI*2); ctx.fill();
+                } else {
+                    ctx.fillStyle = "#ff4d6d"; // Hearts
+                    ctx.font = `${e.size * 5}px serif`;
+                    ctx.fillText('❤', e.x, e.y);
+                }
+
+                e.y += e.speed;
+                e.x += Math.sin(e.y / 30) * e.swing;
+                if(e.y > canvas.height) e.y = -20;
+            });
+            requestAnimationFrame(draw);
+        }
+
+        function updateClocks() {
+            document.querySelectorAll('.milestone-card').forEach(card => {
+                const target = new Date(card.getAttribute('data-date')).getTime();
+                const now = new Date().getTime();
+                const diff = Math.abs(now - target);
+
+                const parts = {
+                    days: Math.floor(diff / 86400000),
+                    hrs: Math.floor((diff / 3600000) % 24),
+                    min: Math.floor((diff / 60000) % 60),
+                    sec: Math.floor((diff / 1000) % 60)
+                };
+
+                card.querySelector('.live-clock').innerHTML = Object.entries(parts).map(([label, val]) => `
+                    <div class="time-unit">
+                        <span class="unit-value">${val}</span>
+                        <span class="unit-label">${label}</span>
+                    </div>
+                `).join('');
+            });
+        }
+
+        window.addEventListener('resize', init);
+        setInterval(updateClocks, 1000);
+        init(); draw(); updateClocks();
+    </script>
+</body>
+</html>
